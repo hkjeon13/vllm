@@ -11,6 +11,7 @@ from vllm.config import (CacheConfig, ModelConfig, ParallelConfig,
 class EngineArgs:
     """Arguments for vLLM engine."""
     model: str
+    token: Optional[str] = None
     tokenizer: Optional[str] = None
     tokenizer_mode: str = 'auto'
     trust_remote_code: bool = False
@@ -255,7 +256,7 @@ class EngineArgs:
         self,
     ) -> Tuple[ModelConfig, CacheConfig, ParallelConfig, SchedulerConfig,
                Optional[LoRAConfig]]:
-        model_config = ModelConfig(self.model, self.tokenizer,
+        model_config = ModelConfig(self.model, self.token, self.tokenizer,
                                    self.tokenizer_mode, self.trust_remote_code,
                                    self.download_dir, self.load_format,
                                    self.dtype, self.seed, self.revision,

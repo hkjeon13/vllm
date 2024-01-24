@@ -61,6 +61,7 @@ class ModelConfig:
     def __init__(
         self,
         model: str,
+        token: str,
         tokenizer: str,
         tokenizer_mode: str,
         trust_remote_code: bool,
@@ -76,6 +77,7 @@ class ModelConfig:
         max_context_len_to_capture: Optional[int] = None,
     ) -> None:
         self.model = model
+        self.token = token
         self.tokenizer = tokenizer
         self.tokenizer_mode = tokenizer_mode
         self.trust_remote_code = trust_remote_code
@@ -99,7 +101,7 @@ class ModelConfig:
             self.download_dir = model_path
             self.tokenizer = model_path
 
-        self.hf_config = get_config(self.model, trust_remote_code, revision)
+        self.hf_config = get_config(self.model, trust_remote_code, self.token, revision)
         self.dtype = _get_and_verify_dtype(self.hf_config, dtype)
         self.max_model_len = _get_and_verify_max_len(self.hf_config,
                                                      max_model_len)

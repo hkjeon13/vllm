@@ -69,6 +69,7 @@ class LLM:
     def __init__(
         self,
         model: str,
+        token: Optional[str] = None,
         tokenizer: Optional[str] = None,
         tokenizer_mode: str = "auto",
         trust_remote_code: bool = False,
@@ -88,6 +89,7 @@ class LLM:
             kwargs["disable_log_stats"] = True
         engine_args = EngineArgs(
             model=model,
+            token=token,
             tokenizer=tokenizer,
             tokenizer_mode=tokenizer_mode,
             trust_remote_code=trust_remote_code,
